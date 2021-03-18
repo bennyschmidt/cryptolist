@@ -1,0 +1,12 @@
+th:nth-of-type(4),
+td.price {
+  max-width: 75px;
+}
+
+.price {
+  color: #37be7f;
+}
+
+.price.negative {
+  color: #e3485f;
+}
