@@ -21,7 +21,7 @@ export const PriceTable = () => {
             <tr {...headerGroups.getHeaderGroupProps()}>
               {
                 headerGroups.headers?.map((column: any) => (
-                  <th {...column.getHeaderProps()}>
+                  <th {...column.getHeaderProps(column.getSortByToggleProps)}>
                     {
                       column.render('Header')
                     }
