@@ -57,177 +57,92 @@ export const usePriceTable = () => {
   }, [prices]);
 
   const columns = useMemo(() => {
-    const sortByRank = (a, b) => {
-      const rowA = a.original.col1;
-      const rowB = b.original.col1;
-
-      if (rowA > rowB) {
+    const compare = (a, b) => {
+      if (a > b) {
         return -1;
       }
 
-      if (rowB > rowA) {
+      if (b > a) {
         return 1;
       }
 
        return 0;
-    };
+    }
 
-    const sortByName = (a, b) => {
-      const rowA = a.original.col2.props.children[2].props.children;
-      const rowB = b.original.col2.props.children[2].props.children;
+    const sortByRank = (a, b) => compare(
+      a.original.col1,
+      b.original.col1
+    );
 
-      if (rowA > rowB) {
-        return -1;
-      }
+    const sortByName = (a, b) => compare(
+      a.original.col2.props.children[2].props.children,
+      b.original.col2.props.children[2].props.children
+    );
 
-      if (rowB > rowA) {
-        return 1;
-      }
-
-       return 0;
-    };
-
-    const sortByPrice = (a, b) => {
-      const rowA = parseFloat(
+    const sortByPrice = (a, b) => compare(
+      parseFloat(
         `${a.original.col3.replace(/\$|,/gi, '')}`
-      );
-
-      const rowB = parseFloat(
+      ),
+      parseFloat(
         `${b.original.col3.replace(/\$|,/gi, '')}`
-      );
+      )
+    );
 
-      if (rowA > rowB) {
-        return -1;
-      }
-
-      if (rowB > rowA) {
-        return 1;
-      }
-
-       return 0;
-    };
-
-    const sortByPercent = (a, b) => {
-      const rowA = parseFloat(
+    const sortByPercent = (a, b) => compare(
+      parseFloat(
         `${a.original.col4.props.children.replace(/%|,/gi, '')}`
-      );
-
-      const rowB = parseFloat(
+      ),
+      parseFloat(
         `${b.original.col4.props.children.replace(/%|,/gi, '')}`
-      );
+      )
+    );
 
-      if (rowA > rowB) {
-        return -1;
-      }
+    const sortByMarketShare = (a, b) => compare(
+      parseFloat(a.original.col5.replace(/%|,/gi, '')),
+      parseFloat(b.original.col5.replace(/%|,/gi, ''))
+    );
 
-      if (rowB > rowA) {
-        return 1;
-      }
-
-      return 0;
-    };
-
-    const sortByMarketShare = (a, b) => {
-      const rowA = parseFloat(a.original.col5.replace(/%|,/gi, ''));
-      const rowB = parseFloat(b.original.col5.replace(/%|,/gi, ''));
-
-      if (rowA > rowB) {
-        return -1;
-      }
-
-      if (rowB > rowA) {
-        return 1;
-      }
-
-      return 0;
-    };
-
-    const sortByMarketCap = (a, b) => {
-      const rowA = parseInt(
+    const sortByMarketCap = (a, b) => compare(
+      parseInt(
         `${a.original.col6.replace(/\$|,/gi, '')}`,
         10
-      );
-
-      const rowB = parseInt(
+      ),
+      parseInt(
         `${b.original.col6.replace(/\$|,/gi, '')}`,
         10
-      );
+      )
+    );
 
-      if (rowA > rowB) {
-        return -1;
-      }
-
-      if (rowB > rowA) {
-        return 1;
-      }
-
-       return 0;
-    };
-
-    const sortByVolume = (a, b) => {
-      const rowA = parseFloat(
+    const sortByVolume = (a, b) => compare(
+      parseFloat(
         `${a.original.col7.replace(/\$|,/gi, '')}`
-      );
-
-      const rowB = parseFloat(
+      ),
+      parseFloat(
         `${b.original.col7.replace(/\$|,/gi, '')}`
-      );
+      )
+    );
 
-      if (rowA > rowB) {
-        return -1;
-      }
-
-      if (rowB > rowA) {
-        return 1;
-      }
-
-       return 0;
-    };
-
-    const sortBySupply = (a, b) => {
-      const rowA = parseInt(
+    const sortBySupply = (a, b) => compare(
+      parseInt(
         `${a.original.col8.replace(/[A-Z]| |,/gi, '')}`,
         10
-      );
-
-      const rowB = parseInt(
+      ),
+      parseInt(
         `${b.original.col8.replace(/[A-Z]| |,/gi, '')}`,
         10
-      );
+      )
+    );
 
-      if (rowA > rowB) {
-        return -1;
-      }
-
-      if (rowB > rowA) {
-        return 1;
-      }
-
-       return 0;
-    };
-
-    const sortByLastATH = (a, b) => {
-
-      const rowA = parseInt(
-        a.original.col9.props.children[0],
+    const sortByLastATH = (a, b) => compare(
+      parseInt(
+        a.original.col9.props.children[0].replace(',', '').replace('< 1', '0'),
         10
-      );
-
-      const rowB = parseInt(
-        b.original.col9.props.children[0],
+      ),
+      parseInt(
+        b.original.col9.props.children[0].replace(',', '').replace('< 1', '0'),
         10
-      );
-
-      if (rowA > rowB) {
-        return -1;
-      }
-
-      if (rowB > rowA) {
-        return 1;
-      }
-
-       return 0;
-    };
+      )
+    );
 
     return [
       {
