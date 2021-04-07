@@ -1,7 +1,1 @@
-Screenshot:
-
-![screenshot](/screenshot.png?raw=true "Screenshot")
-
-Demo:
-
-![demo](/demo.gif?raw=true "Demo")
+Live preview: [CryptoList](https://exactchange.herokuapp.com/cryptolist)
