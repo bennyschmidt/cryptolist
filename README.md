@@ -1,1 +1,1 @@
-Live preview: [CryptoList](https://exactchange.herokuapp.com/cryptolist)
+Live preview: [CryptoList](https://www.exactchange.network/cryptolist)
